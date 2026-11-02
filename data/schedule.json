@@ -1,0 +1,261 @@
+{
+  "_readme": "IradOdin TV grid. Times are Irad Time (UTC+6). A slot is {t, show}; 'days' swaps the show on given weekdays (0 = Sunday). 'specials' replace every slot from 'from' up to (not including) 'to' on that date. {film1}/{film2} pick from 'films' by the day number (days since 1970-01-01 in Irad Time): film1 = n % len, film2 = (n + 4) % len. title_en/films_en are for vnurzhan.com's English TV guide.",
+  "films": [
+    "«Белое солнце пустыни» (1970)",
+    "«Афоня» (1975)",
+    "«Служебный роман» (1977)",
+    "«Кавказская пленница» (1966)",
+    "«Москва слезам не верит» (1979)",
+    "«Офицеры» (1971)",
+    "«Джентльмены удачи» (1971)",
+    "«Добро пожаловать, или Посторонним вход воспрещён» (1964)",
+    "«Берегись автомобиля» (1966)",
+    "«Иван Васильевич меняет профессию» (1973)"
+  ],
+  "shows": {
+    "anthem": {
+      "title": "Гимн. Новости",
+      "desc": "Начало вещания. Государственный гимн, краткий выпуск новостей.",
+      "title_en": "Anthem. News"
+    },
+    "breakfast": {
+      "title": "«Доброе утро, Ирад»",
+      "desc": "Утренний канал: погода, курсы, дороги, гости студии. Новости каждые полчаса.",
+      "title_en": "Good Morning, Irad (breakfast programme)"
+    },
+    "news": {
+      "title": "Новости",
+      "desc": "Выпуск новостей на русском языке по материалам IradOne.",
+      "title_en": "News"
+    },
+    "film1": {
+      "title": "Х/ф {film1}",
+      "desc": "Художественный фильм.",
+      "title_en": "Film: {film1}"
+    },
+    "doctor": {
+      "title": "«Домашний доктор»",
+      "desc": "Врачи Нуржанской городской больницы отвечают на письма телезрителей.",
+      "title_en": "The Family Doctor"
+    },
+    "faith": {
+      "title": "«Час веры». Православная и сиро-ирадская служба",
+      "desc": "Воскресная религиозная программа: православная половина и сиро-ирадская половина.",
+      "title_en": "Hour of Faith: Orthodox and Syro-Iradi service"
+    },
+    "uchastok": {
+      "title": "Сериал «Участок»",
+      "desc": "Многосерийный художественный фильм.",
+      "title_en": "Series: The Precinct"
+    },
+    "zemlyaki": {
+      "title": "«Земляки»: Нуржан и Чуйский район",
+      "desc": "Люди, предприятия и сёла Чуйской долины.",
+      "title_en": "Countrymen: Nurzhan and Chu District"
+    },
+    "sad": {
+      "title": "«Сад и огород»",
+      "desc": "Советы садоводам и дачникам. Отвечает агроном Нина Петрова.",
+      "title_en": "Garden and Allotment"
+    },
+    "cartoons": {
+      "title": "Мультфильмы",
+      "desc": "Для самых маленьких.",
+      "title_en": "Cartoons"
+    },
+    "pole": {
+      "title": "«Поле чудес по-ирадски»",
+      "desc": "Телевизионная игра.",
+      "title_en": "Field of Wonders, Iradi style"
+    },
+    "tainy": {
+      "title": "Сериал «Тайны следствия»",
+      "desc": "Многосерийный художественный фильм.",
+      "title_en": "Series: Secrets of the Investigation"
+    },
+    "news_main": {
+      "title": "Новости ИрадОдин",
+      "desc": "Главная вечерняя информационная программа на русском языке.",
+      "hl": true,
+      "title_en": "IradOdin News"
+    },
+    "film2": {
+      "title": "Х/ф {film2}",
+      "desc": "Вечерний фильм.",
+      "title_en": "Film: {film2}"
+    },
+    "concert": {
+      "title": "«Пятничный концерт». Эстрада 70-х",
+      "desc": "Из золотого фонда телевидения.",
+      "title_en": "Friday Concert: 1970s estrada"
+    },
+    "itogi": {
+      "title": "«Итоги дня»",
+      "desc": "Комментарии, интервью, спорт и погода.",
+      "title_en": "The Day's Summary"
+    },
+    "night": {
+      "title": "Ночной эфир. Музыка",
+      "desc": "Музыкальная программа.",
+      "title_en": "Night music"
+    },
+    "signoff": {
+      "title": "Окончание вещания",
+      "desc": "",
+      "title_en": "Close down"
+    },
+    "derby": {
+      "title": "Футбол. Чемпионат Ирада, 27-й тур. «Нефтчи» — «Тулпар». Прямая трансляция со стадиона «НурГаз»",
+      "desc": "Комментирует Валерий Дёмин.",
+      "hl": true,
+      "title_en": "Football: Irad League round 27, Neftchi v Tulpar. Live from NurGaz Stadium"
+    },
+    "after_derby": {
+      "title": "Новости. После дерби",
+      "desc": "Вечерний выпуск новостей.",
+      "hl": true,
+      "title_en": "News. After the derby"
+    },
+    "derby_replay": {
+      "title": "Футбол. «Нефтчи» — «Тулпар». Повтор матча 27-го тура",
+      "desc": "Комментирует Валерий Дёмин.",
+      "title_en": "Football: Neftchi v Tulpar, round 27 replay"
+    },
+    "cup_final": {
+      "title": "Футбол. Кубок Ирада. Финал. «Нефтчи» — «Аттелком». Прямая трансляция из Таласа",
+      "desc": "«Силк Роуд Арена». Комментирует Валерий Дёмин.",
+      "hl": true,
+      "title_en": "Football: Irad Cup final, Neftchi v Attelkom. Live from Talas"
+    }
+  },
+  "grid": [
+    {
+      "t": "06:00",
+      "show": "anthem"
+    },
+    {
+      "t": "06:15",
+      "show": "breakfast"
+    },
+    {
+      "t": "09:00",
+      "show": "news"
+    },
+    {
+      "t": "09:20",
+      "show": "film1"
+    },
+    {
+      "t": "11:10",
+      "show": "doctor",
+      "days": {
+        "0": "faith"
+      }
+    },
+    {
+      "t": "12:00",
+      "show": "news"
+    },
+    {
+      "t": "12:30",
+      "show": "uchastok"
+    },
+    {
+      "t": "14:00",
+      "show": "zemlyaki",
+      "days": {
+        "6": "sad"
+      }
+    },
+    {
+      "t": "15:00",
+      "show": "news"
+    },
+    {
+      "t": "15:20",
+      "show": "cartoons"
+    },
+    {
+      "t": "16:00",
+      "show": "pole"
+    },
+    {
+      "t": "18:00",
+      "show": "tainy"
+    },
+    {
+      "t": "20:00",
+      "show": "news_main"
+    },
+    {
+      "t": "20:40",
+      "show": "film2",
+      "days": {
+        "5": "concert"
+      }
+    },
+    {
+      "t": "22:30",
+      "show": "itogi"
+    },
+    {
+      "t": "23:10",
+      "show": "night"
+    },
+    {
+      "t": "01:00",
+      "show": "signoff"
+    }
+  ],
+  "specials": [
+    {
+      "date": "2026-10-31",
+      "from": "17:40",
+      "to": "20:40",
+      "slots": [
+        {
+          "t": "17:40",
+          "show": "derby"
+        },
+        {
+          "t": "20:00",
+          "show": "after_derby"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-01",
+      "from": "14:00",
+      "to": "16:00",
+      "slots": [
+        {
+          "t": "14:00",
+          "show": "derby_replay"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-07",
+      "from": "14:00",
+      "to": "16:00",
+      "slots": [
+        {
+          "t": "13:50",
+          "show": "cup_final"
+        }
+      ]
+    }
+  ],
+  "films_en": [
+    "White Sun of the Desert (1970)",
+    "Afonya (1975)",
+    "Office Romance (1977)",
+    "Kidnapping, Caucasian Style (1966)",
+    "Moscow Does Not Believe in Tears (1979)",
+    "Officers (1971)",
+    "Gentlemen of Fortune (1971)",
+    "Welcome, or No Trespassing (1964)",
+    "Beware of the Car (1966)",
+    "Ivan Vasilievich Changes Profession (1973)"
+  ]
+}
