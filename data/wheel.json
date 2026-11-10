@@ -1,0 +1,12 @@
+{
+  "station": "Радио ИрадОдин",
+  "tracks": {
+    "anthem": {"src": "audio/spirit-of-irad.mp3", "title": "Государственный гимн «Дух Ирада»", "by": "Оркестр Корпуса государственной обороны", "dur": 147.6},
+    "bells": {"src": "audio/st-janyl-bells-sunday.mp3", "title": "Колокола собора Святой Джаныл, Ийык-Джаныл", "by": "Запись с соборной площади", "dur": 56.05}
+  },
+  "cues": {
+    "anthem": ["anthem"],
+    "faith": [{"track": "bells", "at": 1800}]
+  },
+  "rotation": {}
+}
