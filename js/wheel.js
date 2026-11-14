@@ -129,35 +129,57 @@
     }
 
     // A player on an <audio> element. ui(state) is called on every change: state.playing (bool), state.item (at()),
-    // state.next (next()), state.error.
+    // state.next (next()), state.error, state.buffering (on, but the sound has not started or has stalled). A second, hidden element loads the next item about 12 seconds before the
+    // current one ends, so items follow each other without a gap, as on air; it copies the page element's volume.
     function player(audio, ui) {
-      var on = false, cur = null, timer = null;
+      var on = false, cur = null, timer = null, pre = null, els = [audio, new Audio()], ai = 0, buf = false;
+      els[1].preload = "auto";
+      audio.addEventListener("volumechange", function () { els[1].volume = audio.volume; els[1].muted = audio.muted; });
+      function el() { return els[ai]; }
       function draw(extra) {
         var ms = now(), it = at(ms);
-        ui({ playing: on && !!cur, armed: on, item: it, next: it.track ? null : next(ms), error: extra && extra.error });
+        ui({ playing: on && !!cur, armed: on, buffering: on && !!cur && buf, item: it, next: it.track ? null : next(ms), error: extra && extra.error });
         return it;
+      }
+      function start(e, tr) {                     // seek to where the station is now, then play
+        buf = e.readyState < 3;
+        var seek = function () { e.removeEventListener("loadedmetadata", seek); try { e.currentTime = at(now()).offset || 0; } catch (x) {} };
+        if (e.readyState >= 1) seek(); else e.addEventListener("loadedmetadata", seek);
+        var p = e.play(); if (p && p.catch) p.catch(function () { on = false; cur = null; draw({ error: true }); });
+      }
+      function preload(it) {                      // warm the other element with whatever follows this item
+        var nx = at(it.untilMs + 50), o = els[1 - ai];
+        if (!nx.track || nx.track.id === it.track.id || pre === nx.track.id) return;
+        pre = nx.track.id; o.src = nx.track.src; o.load();
       }
       function load() {
         clearTimeout(timer);
         var it = draw();
         if (!on) return;
-        if (!it.track) { cur = null; audio.pause(); timer = setTimeout(load, 30000); return; }
-        if (!cur || cur.id !== it.track.id || Math.abs(audio.currentTime - it.offset) > 4) {
-          cur = it.track;
-          audio.src = it.track.src;
-          var seek = function () { audio.removeEventListener("loadedmetadata", seek); try { audio.currentTime = at(now()).offset || 0; } catch (e) {} };
-          audio.addEventListener("loadedmetadata", seek);
-          var p = audio.play(); if (p && p.catch) p.catch(function () { on = false; cur = null; draw({ error: true }); });
+        if (!it.track) { cur = null; el().pause(); timer = setTimeout(load, 30000); return; }
+        if (!cur || cur.id !== it.track.id || Math.abs(el().currentTime - it.offset) > 4) {
+          var old = el();
+          if (pre === it.track.id && (!cur || cur.id !== it.track.id)) ai = 1 - ai;   // the next item is already loaded
+          else el().src = it.track.src;
+          if (old !== el()) old.pause();
+          pre = null; cur = it.track;
+          start(el(), it.track);
           draw();
         }
-        timer = setTimeout(load, Math.max(1000, Math.min(30000, it.untilMs - now() + 300)));
+        var left = it.untilMs - now();
+        if (left < 15000) preload(it);
+        timer = setTimeout(load, Math.max(1000, Math.min(30000, left < 15000 ? left + 300 : left - 12000)));
       }
-      audio.addEventListener("ended", function () { cur = null; load(); });
-      audio.addEventListener("error", function () { if (on) { on = false; cur = null; draw({ error: true }); } });
+      els.forEach(function (e) {
+        e.addEventListener("ended", function () { if (e === el()) { cur = null; load(); } });
+        e.addEventListener("waiting", function () { if (e === el() && on && !buf) { buf = true; draw(); } });
+        e.addEventListener("playing", function () { if (e === el() && buf) { buf = false; draw(); } });
+        e.addEventListener("error", function () { if (e === el() && on) { on = false; cur = null; draw({ error: true }); } else if (e !== el()) pre = null; });
+      });
       draw();
       setInterval(function () { if (!on) draw(); }, 30000);
       return {
-        toggle: function () { on = !on; if (!on) { audio.pause(); cur = null; clearTimeout(timer); draw(); } else load(); return on; },
+        toggle: function () { on = !on; buf = false; if (!on) { els[0].pause(); els[1].pause(); cur = null; clearTimeout(timer); draw(); } else load(); return on; },
         refresh: draw
       };
     }
